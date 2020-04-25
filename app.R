@@ -1,8 +1,8 @@
 library(shiny)
 
-library(tidyverse); library(maps)
-source("visualizeDB.R")
-load("data/WoSDB.RData")
+library(tidyverse); library(maps); library(here)
+source(here("src", "visualizeDB.R"))
+load(here("data", "appdata.RData"))
 spp <- WoSDB %>% select(Species) %>% arrange(Species) %>% pull(Species) %>% unique %>% as.character
 
 # Define UI for application that draws a histogram
