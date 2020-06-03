@@ -1,11 +1,9 @@
 filtrar <- function(df, sp = "Quercus robur") filter(df, Species == sp)
 
-references <- function(df1 = WoSDB, df2 = References, sp = "Quercus robur") {
-  filter(df1, Species == sp) %>%
-    select(ReferenceID) %>%
-    merge(df2) %>%
-    unique %>%
+references <- function(df1 = WoSDB, sp = "Quercus robur") {
+  filter(df1, TPLName == sp) %>%
     select(Reference) %>%
+    unique %>%
     arrange(Reference) %>%
     rename(References = Reference) %>%
     as_tibble

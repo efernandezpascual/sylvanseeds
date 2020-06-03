@@ -5,6 +5,8 @@ account: efernandezpascual
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1957695
-bundleId: 2894597
-url: https://efernandezpascual.shinyapps.io/sylvanseeds/
-when: 1584545848.64122
+bundleId: 3223800
+url: https://sylvanseeds.shinyapps.io/sylvanseeds/
+when: 1591199420.19341
+asMultiple: FALSE
+asStatic: FALSE
