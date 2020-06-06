@@ -98,11 +98,3 @@ p1
 ```{r fig2, echo = FALSE, fig.pos = "H", fig.cap = "Example of the germination records as shown by the *Sylvan Seeds* app. Records for one species, the European pedunculate oak, *Quercus robur*. Each panel shows the results for a combination of experimental conditions, with the germination temperature varying within each panel. Bars represent the mean germination proportion and brackets the 95% binomial confidence interval.", fig.align = "center", fig.width=7, fig.height=9}
 p2
 ```
-
-# Appendix 1 – Data sources. List of references used to build the germination database.
-
-**Note: References are provided as they were exported from Web of Science to Endnote, and exactly as they are in the database and the Sylvan Seeds app. They can be edited for final publication.**
-
-```{r echo = FALSE}
-MSrefapp
-```
