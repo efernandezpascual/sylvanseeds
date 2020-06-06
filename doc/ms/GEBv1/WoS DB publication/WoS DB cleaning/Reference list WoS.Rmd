@@ -1,0 +1,18 @@
+---
+title: "References WoS"
+author: "Eduardo Fernández Pascual"
+date: "17/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message = FALSE, echo = FALSE, warning = FALSE}
+library(tidyverse); library(kableExtra)
+load("C:/EFP/Trabayu/GitHub/sylvanseeds/data/WoSDB.RData")
+References %>% select(Reference) %>% arrange(Reference) %>% kable(caption = "Appendix 1 – Data sources. List of references used to build the germination database.", booktabs = TRUE) %>% kable_styling(latex_options = c("striped", "hold_position"))
+```
+
+Refs
