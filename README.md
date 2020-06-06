@@ -1,6 +1,8 @@
 README.md
 ================
 
+![Sylvan Seeds](data/2017070313%20Blue%20Ridge%20Parkway%20small.jpg)
+
 # Sylvan Seeds
 
 *Sylvan Seeds* is a database of seed germination ecology for the
@@ -18,5 +20,10 @@ The following materials are available in this repository:
     format](https://github.com/efernandezpascual/sylvanseeds/blob/master/results/Supplementary%20material%206%20-%20Database.csv)
   - [The Sylvan Seeds `shiny` app for visualizing the
     database](https://sylvanseeds.shinyapps.io/sylvanseeds/)
-  - The article describing the collection of the database, which is in
-    preparation.
+  - [The article describing the collection and fields of the
+    database](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/last/last.md),
+    which is in preparation.
+
+## Citation
+
+Please cite the database as `CITATION`
