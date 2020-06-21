@@ -1,0 +1,32 @@
+---
+title: "Cover letter"
+author: "Eduardo Fernández Pascual"
+date: "20/6/2020"
+output: pdf_document
+bibliography: refs.bib
+csl: new-phytologist.csl
+link-citations: yes
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Dear Editorial Board,
+
+I submit my manuscript *SylvanSeeds, a database and web app to explore seed germination in temperate broadleaf and mixed forests* to be considered for publication as a **Methods** paper in New Phytologist.
+
+## What hypotheses or questions does this work address?
+
+This is a methods paper describing *SylvanSeeds*, a database and web app (http://sylvanseeds.shinyapps.io/sylvanseeds/) of raw germination records for frequent species of temperate deciduous and mixed forests. The list of frequent species was created using 17,852 vegetation relevés from the sPlot database [@RN4658].
+
+## How does this work advance our current understanding of plant science?
+
+*SylvanSeeds* makes publicly available 4,828 germination records of 364 species from 74 families, collected in 46 countries between 1920-2017. The database is the result of a systematic literature search that screened 6,791 references and extracted raw data from 614. This manuscript presents the search methodology, applicable to other biomes.
+
+## Why is this work important and timely?
+
+Plant science is embarked on a global synthesis of functional traits at species [@RN3318] and community levels [@RN4664]. Synthesis of seed functions is however hindered by a lack of global germination datasets [@RN4655], a gap filled by *SylvanSeeds*.
+
+## References

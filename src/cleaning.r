@@ -4,17 +4,17 @@ library(tidyverse); library(here); library(sp); library(openxlsx)
 
 ## TPL Names from common source
 
-read.csv("../tpl/results/TPLNames.csv") -> Names
-read.csv("../tpl/results/Families.csv") -> SeedFamilies
+read.csv("../#tpl/results/TPLNames.csv") -> Names
+read.csv("../#tpl/results/Families.csv") -> SeedFamilies
 
 ## Species file
 
 rbind(
-  read.csv("../splot12/data/Vegetation/species_Edu.csv") %>% 
+  read.csv("../#plots/data/sPlot12/species_Edu.csv") %>% 
     select(PlotObservationID, species, Relative.cover) %>%
     rename(Cover = Relative.cover, PlotID = PlotObservationID, Taxon = species) %>%
     mutate(PlotID = paste("Rest", PlotID, sep = "_")),
-  read.csv("../splot12/data/Vegetation/forest2_1500.csv", sep = "\t") %>%
+  read.csv("../#plots/data/sPlot12/forest2_1500.csv", sep = "\t") %>%
     select(Relevé.number, Species.name, Cover..) %>%
     rename(Cover = Cover.., PlotID = Relevé.number, Taxon = Species.name) %>%
     mutate(PlotID = paste("Japan", PlotID, sep = "_"))) %>%
@@ -25,7 +25,7 @@ rbind(
 ## Header file
 
 rbind(
-  read.csv("../splot12/data/Vegetation/TDFNH3_Edu.csv") %>%
+  read.csv("../#plots/data/sPlot12/TDFNH3_Edu.csv") %>%
     filter(Herbs.identified..y.n. != "N" | 
              ! Plants.recorded %in% c("All trees & dominant shrubs", 
                                       "All woody species", 
@@ -42,9 +42,9 @@ rbind(
            Latitude = POINT_Y) %>%
     mutate(PlotID = paste("Rest", PlotID, sep = "_")),
   
-  read.table("../splot12/data/Vegetation/japan2.txt", sep = ";", header = T) %>%
+  read.table("../#plots/data/sPlot12/japan2.txt", sep = ";", header = T) %>%
     select(PlotID, REALM:ECO_NAME) %>% 
-    merge(read.csv("../splot12/data/Vegetation/forest2_1500.hea", sep = "\t", quote = ""), by = "PlotID") %>%
+    merge(read.csv("../#plots/data/sPlot12/forest2_1500.hea", sep = "\t", quote = ""), by = "PlotID") %>%
     filter(BIOME == 4) %>%
     select(Relevé.number, ECO_NAME, Altitude..m., Aspect...., 
            Slope...., DEG_LON, DEG_LAT) %>%
@@ -117,7 +117,7 @@ WoS %>%
   merge(read.xlsx(here("data", "WoS", "References.xlsx")), all.x = TRUE,  by = "Reference") %>%
   merge(read.xlsx(here("data", "WoS", "Populations.xlsx")), all.x = TRUE, by = "Population") %>%
   merge(read.csv(here("data", "WoS", "Stratification.csv")), all.x = TRUE) %>%
-  merge(read.csv("../tpl/results/TPLNames.csv"), by.x = "Species", by.y = "Taxon", all.x = TRUE) %>%
+  merge(read.csv("../#tpl/results/TPLNames.csv"), by.x = "Species", by.y = "Taxon", all.x = TRUE) %>%
   merge(read.csv(here("data", "GEB rev1", "Forest_WoS - rev1 - revisión manual de substratos.csv")), by = "Reference") %>%
   rename(Taxon = Species,
          Photoperiod = Ligh, 
@@ -319,12 +319,12 @@ library(plyr)
 
 ## Prepare WWF shapefile
 
-readOGR(dsn = "../wwfmap/WWF", 
+readOGR(dsn = "../#wwfmap/WWF", 
         layer = "wwf_terr_ecos") -> Ecoregions
 rownames(Ecoregions@data) -> Ecoregions@data$id
 fortify(Ecoregions, region = "id") -> Ecoregions.points 
 join(Ecoregions.points, Ecoregions@data, by = "id") %>%
-  inner_join(read.csv("../wwfmap/Biomes.csv"), by = "BIOME") %>%
+  inner_join(read.csv("../#wwfmap/Biomes.csv"), by = "BIOME") %>%
   filter(BIOME == 4) ->
   TBMF
 
