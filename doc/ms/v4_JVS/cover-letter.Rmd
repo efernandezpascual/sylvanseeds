@@ -1,0 +1,26 @@
+---
+title: "Cover letter"
+author: "Eduardo Fernández-Pascual"
+date: "20/6/2020"
+output: pdf_document
+bibliography: refs.bib
+csl: journal-of-vegetation-science.csl
+link-citations: yes
+always_allow_html: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Dear Editorial Board,
+
+I submit my manuscript *SylvanSeeds, a seed germination database for temperate deciduous forests* to be considered for publication as a **Report** in the Journal of Vegetation Science. This is a first submission to JVS and it comprises work that has not been published, and is not being considered for publication elsewhere.
+
+This report describes *SylvanSeeds*, a database and web app (https://efernandezpascual.shinyapps.io/sylvanseeds/) of raw germination records for frequent species of temperate broadleaf and mixed forests. The list of frequent species was created using 17,852 vegetation relevés from the sPlot database [@RN4658].
+
+*SylvanSeeds* makes publicly available 4,828 germination records of 364 species from 74 families, collected in 46 countries between 1920-2017. The database is the result of a systematic literature search that screened 6,791 references and extracted raw data from 614. This manuscript presents the search methodology, applicable to other biomes.
+
+Plant science is embarked on a global synthesis of functional traits at species [@RN3318] and community levels [@RN4664]. Synthesis of seed functions is however hindered by a lack of global germination datasets [@RN4655], a gap filled by *SylvanSeeds*.
+
+## References
