@@ -86,6 +86,21 @@ Names %>%
   select(New.ID, Species, SpeciesNew) %>% 
   arrange(Species) -> dfFrequentNames
 
+merge(dfCounts, dfTotals, by = "Ecoregion") %>%
+  mutate(F = N/T) %>%
+  filter(! Ecoregion %in% c("Cascade Mountains leeward forests", "Central and Southern Cascades forests", 
+                            "Eastern Cascades forests")) %>%
+  filter(F > 0.05) %>% 
+  select(New.ID) %>%
+  unique %>%
+  merge(Names) %>% 
+  mutate(Species = paste(Genus, Species, sep = " "),
+         SpeciesNew = paste(New.Genus, New.Species, sep = " ")) %>% 
+  select(SpeciesNew) %>% 
+  unique %>%
+  arrange(SpeciesNew) %>%
+  pull(SpeciesNew) -> TBMFspp
+
 ## Create Boolean search string
 
 rbind(
@@ -127,9 +142,9 @@ WoS %>%
   mutate(PopulationID = as.factor(PopulationID),
          ReferenceID = as.factor(ReferenceID),
          TPLName = as.factor(paste(New.Genus, New.Species)),
-         Germinable = Replicates * Sown.per.replicate,
-         Germinated = round((Germination * Germinable)/100, 0),
-         Germinated = ifelse(Germinated > Germinable, Germinable, Germinated),
+         Number_seeds = Replicates * Sown.per.replicate,
+         Germinated = round((Germination * Number_seeds)/100, 0),
+         Germinated = ifelse(Germinated > Number_seeds, Number_seeds, Germinated),
          Stratification = as.factor(ifelse(Stratification_type == "None", "N", "Y")),
          GA3 = as.factor(ifelse(GA == 0, "N", "Y")),
          Light = as.factor(ifelse(Photoperiod == 0, "N", "Y")),
@@ -140,13 +155,15 @@ WoS %>%
                            labels = c("-5", "0", "5", "10", "15",
                                       "20", "25", "30", "35", "40", "45")),
          Container_number = Replicates,
-         Sown_by_container = Sown.per.replicate,
+         Number_per_container = Sown.per.replicate,
          Incubation_days = Length.experiment,
          Dry_storage = Dry.storage) %>%
+  mutate(Biome = ifelse(TPLName %in% TBMFspp, "TBMF", "TCF")) %>%
   filter(! is.na(Taxon)) %>%
   filter(GA3 == "N") %>%
   filter(! is.na(Germinated)) %>%
-  dplyr::select(Taxon, 
+  dplyr::select(Biome,
+                Taxon, 
                 TPLName,
                 Family,
                 ReferenceRevised, 
@@ -163,7 +180,7 @@ WoS %>%
                 Container_type,
                 Container_size,
                 Container_number,
-                Sown_by_container,
+                Number_per_container,
                 Incubation_days,
                 Scarification, 
                 Stratification_days, 
@@ -179,7 +196,7 @@ WoS %>%
                 Tmean, 
                 Temperature,
                 Germinated, 
-                Germinable) %>%
+                Number_seeds) %>%
   rename(Reference = ReferenceRevised) -> 
   WoSDB
 
@@ -212,7 +229,7 @@ WoSDB %>% pull(Year) %>% unique() %>% min -> MSoldest
 
 WoSDB %>% group_by(Country) %>% tally() %>% arrange(-n) -> MScountries
 
-WoSDB$Germinable %>% sum -> MSseeds
+WoSDB$Number_seeds %>% sum -> MSseeds
 
 WoSDB %>% pull(Tmean) %>% min -> MSminT
 
@@ -251,7 +268,7 @@ library(metafor); library(binom); library(data.table)
 
 metanalize <- function(d) 
 {
-  m <- rma.glmm(measure = "PLO", xi = Germinated, ni = Germinable, data = d)
+  m <- rma.glmm(measure = "PLO", xi = Germinated, ni = Number_seeds, data = d)
   p <- predict(m, transf = transf.ilogit, digits = 3)
   data.frame(mean = p$pred, lower = p$ci.lb, upper = p$ci.ub)
 }
@@ -281,11 +298,11 @@ df.rma %>%
 
 df[! group %in% rma.works] %>% 
   group_by(group) %>%
-  summarise(Germinated = sum(Germinated), Germinable = sum(Germinable)) %>%
+  summarise(Germinated = sum(Germinated), Number_seeds = sum(Number_seeds)) %>%
   data.frame -> GermDF
 
 cbind(group = GermDF[, 1],
-      binom.confint(GermDF$Germinated, GermDF$Germinable, method = "wilson")[, 4:6]) %>%
+      binom.confint(GermDF$Germinated, GermDF$Number_seeds, method = "wilson")[, 4:6]) %>%
   as_tibble()-> germdf
 
 rbind(germdf, rma.species)  %>%
