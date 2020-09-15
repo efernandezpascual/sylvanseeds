@@ -1,20 +1,20 @@
 library(tidyverse); library(here); library(sp); library(openxlsx)
 
-# Cleaning of the search string (Supplementary file 1)
+# Cleaning of the search string
 
 ## TPL Names from common source
 
-read.csv("../#tpl/results/TPLNames.csv") -> Names
-read.csv("../#tpl/results/Families.csv") -> SeedFamilies
+read.csv("../#tpl/results/TPLNames.csv") -> Names # TPL taxonomy files are in my home drive
+read.csv("../#tpl/results/Families.csv") -> SeedFamilies # TPL taxonomy files are in my home drive
 
-## Species file
+## Clean species file
 
 rbind(
-  read.csv("../#plots/data/sPlot12/species_Edu.csv") %>% 
+  read.csv("../#plots/data/sPlot12/species_Edu.csv") %>% # sPlot vegetation files are in my home drive
     select(PlotObservationID, species, Relative.cover) %>%
     rename(Cover = Relative.cover, PlotID = PlotObservationID, Taxon = species) %>%
     mutate(PlotID = paste("Rest", PlotID, sep = "_")),
-  read.csv("../#plots/data/sPlot12/forest2_1500.csv", sep = "\t") %>%
+  read.csv("../#plots/data/sPlot12/forest2_1500.csv", sep = "\t") %>% # sPlot vegetation files are in my home drive
     select(Relevé.number, Species.name, Cover..) %>%
     rename(Cover = Cover.., PlotID = Relevé.number, Taxon = Species.name) %>%
     mutate(PlotID = paste("Japan", PlotID, sep = "_"))) %>%
@@ -22,10 +22,10 @@ rbind(
   filter(Family %in% SeedFamilies$Family) %>%
   select(PlotID, New.ID, Cover) -> dfSpeciesRevised
 
-## Header file
+## Clean plot header file
 
 rbind(
-  read.csv("../#plots/data/sPlot12/TDFNH3_Edu.csv") %>%
+  read.csv("../#plots/data/sPlot12/TDFNH3_Edu.csv") %>% # sPlot vegetation files are in my home drive
     filter(Herbs.identified..y.n. != "N" | 
              ! Plants.recorded %in% c("All trees & dominant shrubs", 
                                       "All woody species", 
@@ -42,9 +42,9 @@ rbind(
            Latitude = POINT_Y) %>%
     mutate(PlotID = paste("Rest", PlotID, sep = "_")),
   
-  read.table("../#plots/data/sPlot12/japan2.txt", sep = ";", header = T) %>%
+  read.table("../#plots/data/sPlot12/japan2.txt", sep = ";", header = T) %>% # sPlot vegetation files are in my home drive
     select(PlotID, REALM:ECO_NAME) %>% 
-    merge(read.csv("../#plots/data/sPlot12/forest2_1500.hea", sep = "\t", quote = ""), by = "PlotID") %>%
+    merge(read.csv("../#plots/data/sPlot12/forest2_1500.hea", sep = "\t", quote = ""), by = "PlotID") %>% # sPlot vegetation files are in my home drive
     filter(BIOME == 4) %>%
     select(Relevé.number, ECO_NAME, Altitude..m., Aspect...., 
            Slope...., DEG_LON, DEG_LAT) %>%
@@ -89,7 +89,7 @@ Names %>%
 merge(dfCounts, dfTotals, by = "Ecoregion") %>%
   mutate(F = N/T) %>%
   filter(! Ecoregion %in% c("Cascade Mountains leeward forests", "Central and Southern Cascades forests", 
-                            "Eastern Cascades forests")) %>%
+                            "Eastern Cascades forests")) %>% # These ecoregions are in the vegetation db, but belong to different biome
   filter(F > 0.05) %>% 
   select(New.ID) %>%
   unique %>%
@@ -105,16 +105,17 @@ merge(dfCounts, dfTotals, by = "Ecoregion") %>%
 
 rbind(
   dfFrequentNames %>% select(Species),
-  dfFrequentNames %>% select(SpeciesNew) %>% rename(Species = SpeciesNew))%>% 
+  dfFrequentNames %>% select(SpeciesNew) %>% rename(Species = SpeciesNew)) %>% 
   unique %>% 
   arrange(Species) %>%
+  # filter(SpeciesNew %in% TBMFspp) %>% # Exclude species from Cascadia ecoregions
   pull(Species) %>%
   paste(collapse = "” OR “") -> BooleanSpp
 
 paste("(seed OR seeds) AND (dormancy OR germination) AND (“", BooleanSpp, "”)", sep ="") %>% 
-  write.table(here("results", "Supplementary material 1 - Boolean search string.txt"), row.names = F)
+  write.table(here("results", "Boolean search string.txt"), row.names = F)
 
-# Cleaning of the database (Supplementary file 6)
+# Cleaning of the database
 
 read.csv(here("data", "WoS", "Forest_WoS.csv")) -> WoS
 
@@ -133,7 +134,7 @@ WoS %>%
   merge(read.xlsx(here("data", "WoS", "Populations.xlsx")), all.x = TRUE, by = "Population") %>%
   merge(read.csv(here("data", "WoS", "Stratification.csv")), all.x = TRUE) %>%
   merge(read.csv("../#tpl/results/TPLNames.csv"), by.x = "Species", by.y = "Taxon", all.x = TRUE) %>%
-  merge(read.csv(here("data", "GEB rev1", "Forest_WoS - rev1 - revisión manual de substratos.csv")), by = "Reference") %>%
+  merge(read.csv(here("data", "WoS", "Forest_WoS - rev1 - revisión manual de substratos.csv")), by = "Reference") %>%
   rename(Taxon = Species,
          Photoperiod = Ligh, 
          Year = Date.collection,
@@ -200,58 +201,79 @@ WoS %>%
   rename(Reference = ReferenceRevised) -> 
   WoSDB
 
-readr::write_excel_csv(WoSDB, here::here("results", "Supplementary material 6 - Database.csv"))
+WoSDB %>%
+  filter(Biome == "TBMF") %>%
+  select(-Biome) -> TBMFDB # Temperate broadleaf and mixed forest database
+
+WoSDB %>%
+  filter(Biome == "TCF") %>%
+  select(-Biome) -> TCFDB # Temperate coniferous forest database
+
+readr::write_excel_csv(TBMFDB, here::here("results", "TBMF_Database.csv"))
+readr::write_excel_csv(TCFDB, here::here("results", "TCFDB_Database.csv"))
 
 # Calculate numbers for the manuscript main text
 
-dfFrequentNames %>% pull(SpeciesNew) %>% unique %>% length -> MSfrequentspp
+dfFrequentNames %>% 
+  filter(SpeciesNew %in% TBMFspp) %>%
+  pull(SpeciesNew) %>% unique %>% length -> MSfrequentspp
 
 merge(dfHeader, dfSpeciesRevised, by = "PlotID") %>%
+  filter(! Ecoregion %in% c("Cascade Mountains leeward forests", "Central and Southern Cascades forests", 
+                            "Eastern Cascades forests")) %>% # These ecoregions are in the vegetation db, but belong to different biome
   select(New.ID) %>%
   unique %>%
   merge(Names, by = "New.ID") %>%
   mutate(SpeciesNew = paste(New.Genus, New.Species, sep = " ")) %>%
   pull(SpeciesNew) %>% unique %>% length -> MStotalspp
 
-dfHeader %>% pull(PlotID) %>% unique %>% length -> MSplots
+dfHeader %>% 
+  filter(! Ecoregion %in% c("Cascade Mountains leeward forests", "Central and Southern Cascades forests", 
+                            "Eastern Cascades forests")) %>% # These ecoregions are in the vegetation db, but belong to different biome
+  pull(PlotID) %>% unique %>% length -> MSplots
 
-dfHeader %>% pull(Ecoregion) %>% unique %>% length -> MSecoregions
+dfHeader %>% 
+  filter(! Ecoregion %in% c("Cascade Mountains leeward forests", "Central and Southern Cascades forests", 
+                            "Eastern Cascades forests")) %>% # These ecoregions are in the vegetation db, but belong to different biome
+  pull(Ecoregion) %>% unique %>% length -> MSecoregions
 
-WoSDB %>% tally() -> MSrecords
+TBMFDB %>% tally() -> MSrecords
 
-WoSDB %>% pull(Reference) %>% unique %>% length -> MSreferences
+TBMFDB %>% pull(Reference) %>% unique %>% length -> MSreferences
 
-WoSDB %>% pull(Family) %>% unique %>% length -> MSfamilies
+TCFDB %>% pull(Reference) %>% unique %>% length -> MSreferencesTCF
 
-WoSDB %>% pull(TPLName) %>% unique %>% length -> MSspecies
+TBMFDB %>% pull(Family) %>% unique %>% length -> MSfamilies
 
-WoSDB %>% pull(Year) %>% unique() %>% min -> MSoldest
+TBMFDB %>% pull(TPLName) %>% unique %>% length -> MSspecies
 
-WoSDB %>% group_by(Country) %>% tally() %>% arrange(-n) -> MScountries
+TBMFDB %>% pull(Year) %>% unique() %>% min -> MSoldest
 
-WoSDB$Number_seeds %>% sum -> MSseeds
+TBMFDB %>% group_by(Country) %>% tally() %>% arrange(-n) -> MScountries
 
-WoSDB %>% pull(Tmean) %>% min -> MSminT
+TBMFDB$Number_seeds %>% sum -> MSseeds
 
-WoSDB %>% pull(Tmean) %>% max -> MSmaxT
+TBMFDB %>% pull(Tmean) %>% min -> MSminT
 
-WoSDB %>% filter(Alternating == "Y") %>% tally -> MSaltY
+TBMFDB %>% pull(Tmean) %>% max -> MSmaxT
 
-WoSDB %>% filter(Alternating == "N") %>% tally -> MSaltN
+TBMFDB %>% filter(Alternating == "Y") %>% tally -> MSaltY
 
-WoSDB %>% filter(Light == "Y") %>% tally -> MSlightY
+TBMFDB %>% filter(Alternating == "N") %>% tally -> MSaltN
 
-WoSDB %>% filter(Light == "N") %>% tally -> MSlightN
+TBMFDB %>% filter(Light == "Y") %>% tally -> MSlightY
 
-WoSDB %>% filter(is.na(Light)) %>% tally -> MSlightNA
+TBMFDB %>% filter(Light == "N") %>% tally -> MSlightN
 
-WoSDB %>% filter(Stratification_type == "None") %>% tally -> MSstratN
+TBMFDB %>% filter(is.na(Light)) %>% tally -> MSlightNA
 
-WoSDB %>% filter(Stratification_type == "Cold") %>% tally -> MSstratCold
+TBMFDB %>% filter(Stratification_type == "None") %>% tally -> MSstratN
 
-WoSDB %>% filter(Scarification == "Y") %>% tally -> MSscarY
+TBMFDB %>% filter(Stratification_type == "Cold") %>% tally -> MSstratCold
 
-WoSDB %>% arrange(Reference) %>% pull(Reference) %>% unique -> MSrefapp
+TBMFDB %>% filter(Scarification == "Y") %>% tally -> MSscarY
+
+TBMFDB %>% arrange(Reference) %>% pull(Reference) %>% unique -> MSrefapp
 
 save(MSaltN, MSaltY, MScountries, MSlightN, MSlightNA, MSlightY,
      MSrecords, MSscarY, MSstratCold, MSstratN,
@@ -275,7 +297,7 @@ metanalize <- function(d)
 
 ## Data grouped by experimental and species
 
-WoSDB %>%
+TBMFDB %>%
   mutate(group = paste(TPLName, Scarification, Stratification_type,
                        Light, Alternating, Temperature, sep = "_")) %>%
   data.table(.) -> df
@@ -337,7 +359,7 @@ library(plyr)
 ## Prepare WWF shapefile
 
 readOGR(dsn = "../#wwfmap/WWF", 
-        layer = "wwf_terr_ecos") -> Ecoregions
+        layer = "wwf_terr_ecos") -> Ecoregions # Map files are in my home drive
 rownames(Ecoregions@data) -> Ecoregions@data$id
 fortify(Ecoregions, region = "id") -> Ecoregions.points 
 join(Ecoregions.points, Ecoregions@data, by = "id") %>%
@@ -345,7 +367,7 @@ join(Ecoregions.points, Ecoregions@data, by = "id") %>%
   filter(BIOME == 4) ->
   TBMF
 
-WoSDB %>%
+TBMFDB %>%
   dplyr::select(TPLName, Country, Latitude, Longitude) %>%
   dplyr::rename(Species = TPLName) %>%
   unique -> coordinates
@@ -355,14 +377,14 @@ coordinates %>%
   SpatialPoints(proj4string = CRS(proj4string(Ecoregions))) %over% Ecoregions %>%
   cbind(coordinates) -> Places
 
-save(Germination, WoSDB, Places, TBMF,
+save(Germination,TBMFDB, Places, TBMF,
      file = here::here("results", "appdata.RData"))
 
 # Manuscript figures
 
 filtrar <- function(df, sp = "Quercus robur") filter(df, Species == sp)
 
-references <- function(df1 = WoSDB, df2 = References, sp = "Quercus robur") {
+references <- function(df1 = TBMFDB, df2 = References, sp = "Quercus robur") {
   filter(df1, Species == sp) %>%
     select(ReferenceID) %>%
     merge(df2) %>%
@@ -405,7 +427,7 @@ seedplot <- function(df) {
     facet_wrap( ~ Experiment, scales = "free", ncol = 3)
 }
 
-p1 <- mapplot(WoSDB)
+p1 <- mapplot(TBMFDB)
 
 Germination %>% filter(Species == "Quercus robur") %>% seedplot -> p2
 

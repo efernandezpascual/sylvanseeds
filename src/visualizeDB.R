@@ -1,6 +1,6 @@
 filtrar <- function(df, sp = "Quercus robur") filter(df, Species == sp)
 
-references <- function(df1 = WoSDB, sp = "Quercus robur") {
+references <- function(df1 = TBMFDB, sp = "Quercus robur") {
   filter(df1, TPLName == sp) %>%
     select(Reference) %>%
     unique %>%

@@ -9,7 +9,7 @@ spp <- WoSDB %>% select(TPLName) %>% arrange(TPLName) %>% pull(TPLName) %>% uniq
 ui <- fluidPage(
 
     # Application title
-    titlePanel("Sylvan Seeds: Germination database of temperate broadleaf and mixed forests"),
+    titlePanel("SylvanSeeds: Germination database of temperate broadleaf and mixed forests"),
 
     # Sidebar to choose species to display
     sidebarLayout(
