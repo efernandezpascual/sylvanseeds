@@ -33,13 +33,6 @@ The following materials are available in this repository:
     and files needed to create the manuscript.
   - `src` Scripts in `R` language used to clean the raw data, perform
     the analyses of the manuscript, and build the `SylvanSeeds` app.
-  - [The database itself in `.csv`
-    format](https://github.com/efernandezpascual/sylvanseeds/blob/master/results/Supplementary%20material%206%20-%20Database.csv)
-  - [The SylvanSeeds `shiny` app for visualizing the
-    dataset](https://sylvanseeds.shinyapps.io/sylvanseeds/)
-  - [The report paper describing the collection and fields of the
-    dataset](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/manuscript.md),
-    published in the Journal of Vegetation Science.
 
 ## Citation
 

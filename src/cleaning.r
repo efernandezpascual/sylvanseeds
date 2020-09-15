@@ -210,7 +210,7 @@ WoSDB %>%
   select(-Biome) -> TCFDB # Temperate coniferous forest database
 
 readr::write_excel_csv(TBMFDB, here::here("results", "TBMF_Database.csv"))
-readr::write_excel_csv(TCFDB, here::here("results", "TCFDB_Database.csv"))
+readr::write_excel_csv(TCFDB, here::here("results", "TCF_Database.csv"))
 
 # Calculate numbers for the manuscript main text
 

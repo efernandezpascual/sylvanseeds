@@ -1,9 +1,9 @@
 ---
 title: "SylvanSeeds, a seed germination database for temperate deciduous forests"
 subtitle: "Running title: SylvanSeeds, a forest germination database"
-output: 
-  bookdown::word_document2:
-    reference_docx: template.docx
+output: github_document
+  # bookdown::word_document2:
+  #   reference_docx: template.docx
 bibliography: refs.bib
 csl: journal-of-vegetation-science.csl
 link-citations: yes
