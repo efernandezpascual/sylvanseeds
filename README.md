@@ -40,5 +40,4 @@ The following materials are available in this repository:
 Please cite `SylvanSeeds` as:
 
 > Fernández-Pascual, E (2020) SylvanSeeds, a seed germination database
-> for temperate deciduous forests. Journal of Vegetation Science, in
-> press.
+> for temperate deciduous forests.
