@@ -9,6 +9,7 @@ references <- function(df1 = TBMFDB, sp = "Quercus robur") {
     as_tibble
 }
 
+
 mapplot <- function(df, shape = TBMF) {
   ggplot(df, aes(x = Longitude, y = Latitude)) + 
     geom_polygon(data = map_data("world"), aes(x = long, y = lat, group = group), 

@@ -5,18 +5,19 @@ README.md
 
 # SylvanSeeds, a seed germination database for temperate deciduous forests
 
+[*SylvanSeeds*](https://efernandezpascual.github.io/home/sylvanseeds.html)
+is a dataset of seed germination ecology for the temperate broadleaf and
+mixed forest biome of the northern hemisphere. It contains data on \>300
+plant species, obtained from \>500 published references. The data is in
+the form of germination proportions recorded under experimental
+combinations of temperature, light, scarification and stratification.
+
 This repository stores all the information related to the publication
 *SylvanSeeds, a seed germination database for temperate deciduous
 forests*, including the raw datasets, the scripts to perform data
 cleaning and analysis, and the `Rmarkdown` files to create the
-manuscript.
-
-*SylvanSeeds* is a dataset of seed germination ecology for the temperate
-broadleaf and mixed forest biome of the northern hemisphere. It contains
-data on \>300 plant species, obtained from \>500 published references.
-The data is in the form of germination proportions recorded under
-experimental combinations of temperature, light, scarification and
-stratification.
+manuscript. It also stores the code of the *SylvanSeeds* `shiny` app,
+that can be used to visualize the database.
 
 ## Contents
 
@@ -36,7 +37,7 @@ The following materials are available in this repository:
 
 ## Citation
 
-Please cite the dataset as
+Please cite `SylvanSeeds` as:
 
 > Fernández-Pascual, E (2020) SylvanSeeds, a seed germination database
 > for temperate deciduous forests. Journal of Vegetation Science, in

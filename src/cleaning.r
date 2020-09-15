@@ -382,54 +382,40 @@ save(Germination,TBMFDB, Places, TBMF,
 
 # Manuscript figures
 
-filtrar <- function(df, sp = "Quercus robur") filter(df, Species == sp)
+TBMFDB %>%
+  ggplot(aes(x = Longitude, y = Latitude)) + 
+  geom_polygon(data = map_data("world"), aes(x = long, y = lat, group = group), 
+               color = "gainsboro", fill = "gainsboro") +
+  geom_polygon(data = TBMF, aes(x = long, y = lat,group =  group), 
+               fill = "darkolivegreen4", color = "darkolivegreen4") +	
+  geom_point(color = "gold", size = 1.25, alpha = 0.5) +
+  ggthemes::theme_map() +
+  theme(legend.position = "none",
+        axis.title = element_blank()) +
+  coord_cartesian(xlim = c(-160, 180), ylim = c(-55, 80)) -> p1
 
-references <- function(df1 = TBMFDB, df2 = References, sp = "Quercus robur") {
-  filter(df1, Species == sp) %>%
-    select(ReferenceID) %>%
-    merge(df2) %>%
-    unique %>%
-    select(Reference) %>%
-    arrange(Reference) %>%
-    rename(References = Reference) %>%
-    as_tibble
-}
+Germination %>% 
+  filter(Species == "Fagus sylvatica") %>% 
+  ggplot(aes(x = as.factor(Temperature), y = mean, ymin = lower, ymax = upper, fill = Experiment)) + 
+  geom_bar(stat = "identity", alpha = 0.6, show.legend = FALSE) + 
+  geom_errorbar(aes(color = Experiment), width = 0.1, size = 1, 
+                position = position_dodge(.9), show.legend = FALSE) +
+  facet_wrap( ~ Experiment, scales = "free", ncol = 3) +
+  coord_cartesian(ylim = c(0, 1)) +
+  ylab(label = "Germination proportion") + xlab(label = "Average germination temperature (ºC)") +
+  ggthemes::theme_tufte() + 
+  theme(panel.background = element_rect(color = "grey96", fill = "grey96"), 
+        legend.position = "none", 
+        strip.text = element_text(size = 11),
+        axis.text = element_text(size = 12, face = "bold"),
+        axis.title = element_text(size = 14, face = "bold"),
+        legend.text = element_text(size = 16, face = "bold")) -> p2
 
-mapplot <- function(df, shape = TBMF) {
-  ggplot(df, aes(x = Longitude, y = Latitude)) + 
-    geom_polygon(data = map_data("world"), aes(x = long, y = lat, group = group), 
-                 color = "gainsboro", fill = "gainsboro") +
-    geom_polygon(data = shape, aes(x = long, y = lat,group =  group), 
-                 fill = "darkolivegreen4", color = "darkolivegreen4") +	
-    geom_point(color = "gold", size = .5, alpha = 0.5) +
-    coord_cartesian(xlim = c(-150, 180), ylim = c(-55, 80)) +
-    theme(axis.line=element_blank(), axis.text.x=element_blank(),
-          axis.text.y=element_blank(), axis.ticks=element_blank(),
-          axis.title.x=element_blank(), axis.title.y=element_blank(),
-          legend.position="none", panel.background=element_blank(),
-          panel.border=element_blank(), panel.grid.major=element_blank(),
-          panel.grid.minor=element_blank(), plot.background=element_blank(),
-          text = element_text(size = 12),
-          plot.title = element_text(face = c("bold"), size = 14),
-          plot.subtitle = element_text(face = c("italic")))
-}
-
-seedplot <- function(df) {
-  ggplot(df, aes(x = as.factor(Temperature), y = mean, ymin = lower, ymax = upper, fill = Experiment)) + 
-    geom_bar(stat = "identity", alpha = 0.6, show.legend = FALSE) + 
-    geom_errorbar(aes(color = Experiment), width = 0.1, size = 1, 
-                  position = position_dodge(.9), show.legend = FALSE) +
-    coord_cartesian(ylim = c(0, 1)) +
-    ylab(label = "Germination proportion") + xlab(label = "Average germination temperature (ºC)") +
-    theme(text = element_text(size = 10),
-          plot.title = element_text(face = c("bold"), size = 14),
-          plot.subtitle = element_text(face = c("italic"))) +
-    facet_wrap( ~ Experiment, scales = "free", ncol = 3)
-}
-
-p1 <- mapplot(TBMFDB)
-
-Germination %>% filter(Species == "Quercus robur") %>% seedplot -> p2
+# ggsave(p1, file = "results/Fig1.tiff", 
+#        path = NULL, scale = 1, width = 170, height = 70, units = "mm", dpi = 600)
+# 
+# ggsave(p2, file = "results/Fig2.tiff", 
+#        path = NULL, scale = 1, width = 170, height = 150, units = "mm", dpi = 600)
 
 save(p1, p2,
      file = here::here("results", "msfigs.RData"))
