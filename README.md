@@ -1,7 +1,7 @@
 README.md
 ================
 
-![SylvanSeeds](data/2017070313%20Blue%20Ridge%20Parkway%20small.JPG)
+![SylvanSeeds](data/2017070313%20Blue%20Ridge%20Parkway%20small.jpg)
 
 # SylvanSeeds, a seed germination database for temperate deciduous forests
 
