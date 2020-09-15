@@ -1,15 +1,15 @@
 README.md
 ================
 
-![SylvanSeeds](data/2017070313%20Blue%20Ridge%20Parkway%20small.jpg)
+![SylvanSeeds](data/2017070313%20Blue%20Ridge%20Parkway%20small.JPG)
 
 # SylvanSeeds, a seed germination database for temperate deciduous forests
 
 [*SylvanSeeds*](https://efernandezpascual.github.io/home/sylvanseeds.html)
-is a dataset of seed germination ecology for the temperate broadleaf and
-mixed forest biome of the northern hemisphere. It contains data on \>300
-plant species, obtained from \>500 published references. The data is in
-the form of germination proportions recorded under experimental
+is a database of seed germination ecology for the temperate broadleaf
+and mixed forest biome of the northern hemisphere. It contains data on
+\>300 plant species, obtained from \>500 published references. The data
+is in the form of germination proportions recorded under experimental
 combinations of temperature, light, scarification and stratification.
 
 This repository stores all the information related to the publication
