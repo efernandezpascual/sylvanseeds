@@ -266,14 +266,14 @@ Scarification was applied to 248 records.
 
 <div class="figure">
 
-<img src="../results/Fig1.png" alt="**Figure 1** *Geographical distribution of the germination records in the database. Each golden circle is a record. The green areas correspond to the extension of the Temperate Broadleaf and Mixed Forests biome according to the *WWF*.*" width="4015" />
+<img src="../results/Fig1.png" alt="**Figure 1** *Geographical distribution of the germination records in the database. Each golden circle is a record. The green areas correspond to the extension of the Temperate Broadleaf and Mixed Forests biome according to the WWF.*" width="4015" />
 
 <p class="caption">
 
 **Figure 1** *Geographical distribution of the germination records in
 the database. Each golden circle is a record. The green areas correspond
 to the extension of the Temperate Broadleaf and Mixed Forests biome
-according to the *WWF*.*
+according to the WWF.*
 
 </p>
 
@@ -439,7 +439,9 @@ of this manuscript, but please do visit
 updates. It can be visualized with the *SylvanSeeds* app at
 <https://efernandezpascual.shinyapps.io/sylvanseeds/>. The code to
 create this manuscript and the app is stored at
-<https://github.com/efernandezpascual/sylvanseeds>.
+<https://github.com/efernandezpascual/sylvanseeds>. A version of record
+of the repository can be found at
+<https://doi.org/10.5281/zenodo.4081377>.
 
 # References
 

@@ -7,6 +7,8 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4081377.svg)](https://doi.org/10.5281/zenodo.4081377)
+
 ![SylvanSeeds](data/2017070313 Blue Ridge Parkway small.jpg)
 
 # SylvanSeeds, a seed germination database for temperate deciduous forests

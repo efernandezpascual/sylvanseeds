@@ -1,6 +1,8 @@
 README.md
 ================
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4081377.svg)](https://doi.org/10.5281/zenodo.4081377)
+
 ![SylvanSeeds](data/2017070313%20Blue%20Ridge%20Parkway%20small.jpg)
 
 # SylvanSeeds, a seed germination database for temperate deciduous forests
