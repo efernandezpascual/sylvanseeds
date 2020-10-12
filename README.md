@@ -13,11 +13,13 @@ is in the form of germination proportions recorded under experimental
 combinations of temperature, light, scarification and stratification.
 
 This repository stores all the information related to the publication
-*SylvanSeeds, a seed germination database for temperate deciduous
-forests*, including the raw datasets, the scripts to perform data
-cleaning and analysis, and the `Rmarkdown` files to create the
-manuscript. It also stores the code of the *SylvanSeeds* `shiny` app,
-that can be used to visualize the database.
+[*SylvanSeeds, a seed germination database for temperate deciduous
+forests*](https://doi.org/10.1111/jvs.12960), including the raw
+datasets, the scripts to perform data cleaning and analysis, and the
+`Rmarkdown` files to create the
+[manuscript](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/manuscript.md).
+It also stores the code of the *SylvanSeeds* `shiny` app, that can be
+used to visualize the database.
 
 ## Contents
 
@@ -29,7 +31,9 @@ The following materials are available in this repository:
 
   - `data` Original raw files including the primary result of the search
     in the Web of Science, and search notes.
-  - `doc` Files to create the manuscript using `Rmarkdown`.
+  - `doc` Files to create the
+    [manuscript](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/manuscript.md)
+    using `Rmarkdown`.
   - `results` Output of the `R` scripts, including the clean database
     and files needed to create the manuscript.
   - `src` Scripts in `R` language used to clean the raw data, perform
@@ -39,5 +43,7 @@ The following materials are available in this repository:
 
 Please cite `SylvanSeeds` as:
 
-> Fernández-Pascual, E (2020) SylvanSeeds, a seed germination database
-> for temperate deciduous forests.
+> Fernández-Pascual, E. (2020). [SylvanSeeds, a seed germination
+> database for temperate deciduous
+> forests.](https://doi.org/10.1111/jvs.12960) *Journal of Vegetation
+> Science*

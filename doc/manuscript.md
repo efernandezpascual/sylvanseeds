@@ -105,7 +105,7 @@ In short, this approach consisted in (i) obtaining a representative
 number of vegetation plots for the biome from sPlot
 (<https://www.idiv.de/en/splot.html>); and (ii) using the plots to
 produce a list of frequent species (i.e. species that occur in at least
-5 % of the plots of a region).
+5% of the plots of a region).
 
 A list of species for which to search germination data was created using
 vegetation relevés (i.e. records of plant species co-occurring in
@@ -158,33 +158,38 @@ was incorporated into a Boolean search string, together with the words
 “(seed OR seeds) AND (dormancy OR germination)”. This string was
 searched in the *Thompson Reuters Web of Science* on 5 Mar 2019,
 returning 6,791 results. The processing of these results is described in
-a PRISMA flow diagram (**Appendix S1**). A first filter of the results
-by the relevance of the title retained 1,489 references. An effort was
-made to access the full text of all these references, using the
-following channels: (i) “Find Full Text” functionality in *EndNote X9*,
-(ii) online access to the journals using the institutional subscriptions
-of the University of Oviedo; (iii) request to the authors through
-*ResearchGate*; (iv) general search of *pdf* files in *Google* using the
-article details. Unfortunately, 236 references could not be accessed.
-Most of these belonged to smaller publishers not included in the
-subscriptions of the University of Oviedo, and to older journal issues
-which had not been digitalised. The resources of this project did not
-make it possible to further pursue these references, but they are
-included as a *BibTeX* file (**Appendix S2**) in case they can be
-processed in the future. The found texts were accessed to retrieve data
-for the database. At this stage, references were considered to be
-non-relevant if they (i) did not pertain to species in the original
-frequent species list; (ii) did not study germination in species
-monocultures (e.g. competition studies); (iii) did not report the
-minimal information needed (number of seeds sown, germination percentage
-and germination temperature). Records were also excluded when they
-pertained to special germination treatments that do not allow for
-general comparisons (i.e. use of germination promoters such as the plant
-hormone gibberellic acid; drought treatments, including polyethylene
-glycol solutions; application of heavy metals or other pollutants;
-smoke-related germination promoters such as karrikins). Of the accessed
-references, 698 were non-relevant (*BiBTeX* file in **Appendix S3**) and
-555 provided relevant data (*BiBTeX* file in **Appendix S4**).
+a PRISMA flow diagram [(**Appendix
+S1**)](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/Appendices%20S1-S4.pdf).
+A first filter of the results by the relevance of the title retained
+1,489 references. An effort was made to access the full text of all
+these references, using the following channels: (i) “Find Full Text”
+functionality in *EndNote X9*, (ii) online access to the journals using
+the institutional subscriptions of the University of Oviedo; (iii)
+request to the authors through *ResearchGate*; (iv) general search of
+*pdf* files in *Google* using the article details. Unfortunately, 236
+references could not be accessed. Most of these belonged to smaller
+publishers not included in the subscriptions of the University of
+Oviedo, and to older journal issues which had not been digitalised. The
+resources of this project did not make it possible to further pursue
+these references, but they are included as a *BibTeX* file [(**Appendix
+S2**)](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/Appendices%20S1-S4.pdf)
+in case they can be processed in the future. The found texts were
+accessed to retrieve data for the database. At this stage, references
+were considered to be non-relevant if they (i) did not pertain to
+species in the original frequent species list; (ii) did not study
+germination in species monocultures (e.g. competition studies); (iii)
+did not report the minimal information needed (number of seeds sown,
+germination percentage and germination temperature). Records were also
+excluded when they pertained to special germination treatments that do
+not allow for general comparisons (i.e. use of germination promoters
+such as the plant hormone gibberellic acid; drought treatments,
+including polyethylene glycol solutions; application of heavy metals or
+other pollutants; smoke-related germination promoters such as
+karrikins). Of the accessed references, 698 were non-relevant (*BiBTeX*
+file in [**Appendix
+S3**](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/Appendices%20S1-S4.pdf))
+and 555 provided relevant data (*BiBTeX* file in [**Appendix
+S4**](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/Appendices%20S1-S4.pdf)).
 
 The systematic approach applied may fail to capture references on
 species belonging to the nemoral biome for three reasons: (1) the
@@ -202,7 +207,7 @@ reference. After completing the database, species names in the frequent
 species list for which no relevant papers had been found were searched
 in the taxonomical index of the Baskin and Baskin book. There were 273
 species with missing data and mentioned by Baskin and Baskin in their
-index. A random sample of 10 % of these species were selected, and their
+index. A random sample of 10% of these species were selected, and their
 references as mentioned in the book were searched. All of them were
 found to be either inaccessible (national journals or old conference
 proceedings not available online) or to have no relevant data
@@ -242,15 +247,15 @@ The final database contains 4,012 records (germination proportions for a
 given seed lot of a species, recorded in a set of experimental
 conditions) from 555 references. The plant materials had been collected
 across the Temperate Broadleaf and Mixed Forest biome and surrounding
-areas (**Fig. @ref(fig:fig1)**), in both hemispheres. Although the
-frequent species list was created using only relevés from the northern
-hemisphere, the web search of germination articles found studies of
-those species that had been performed in the southern hemisphere. These
-records are included in the database, and their geographical origin is
-reported. The oldest record was from 1920 and the top three contributing
-countries were the USA (780), the UK (543) and Japan (531). There were
-334 species represented, from 72 seed plant families. The total estimate
-of seeds used in the experiments was 746,947. The range of germination
+areas (**Fig. 1**), in both hemispheres. Although the frequent species
+list was created using only relevés from the northern hemisphere, the
+web search of germination articles found studies of those species that
+had been performed in the southern hemisphere. These records are
+included in the database, and their geographical origin is reported. The
+oldest record was from 1920 and the top three contributing countries
+were the USA (780), the UK (543) and Japan (531). There were 334 species
+represented, from 72 seed plant families. The total estimate of seeds
+used in the experiments was 746,947. The range of germination
 temperatures (weighted average of the daily thermoperiod) went from -1
 to 43 ºC, with 1,628 records of constant temperatures and 2,384 of
 alternating temperatures. Light was used in 2,524 records, darkness in
@@ -259,33 +264,49 @@ experiments were performed with unstratified seeds in 2,607 records, and
 of the rest, the majority (1,232) went through cold stratification.
 Scarification was applied to 248 records.
 
+<div class="figure">
+
+<img src="../results/Fig1.png" alt="**Figure 1** *Geographical distribution of the germination records in the database. Each golden circle is a record. The green areas correspond to the extension of the Temperate Broadleaf and Mixed Forests biome according to the *WWF*.*" width="4015" />
+
+<p class="caption">
+
+**Figure 1** *Geographical distribution of the germination records in
+the database. Each golden circle is a record. The green areas correspond
+to the extension of the Temperate Broadleaf and Mixed Forests biome
+according to the *WWF*.*
+
+</p>
+
+</div>
+
 ## Database file
 
-The database is provided as a *csv* file, comma separated, named
-**Appendix S5** (see online Supporting Information). The first row of
-the file contains the header data, with the following variables: *Taxon*
-(the original species names, as used in the references), *TPLName* (*The
-Plant List* species names), *Family* (the botanical family of the
-species), *Reference* (bibliographic source of the record), *Year* (year
-the seed lot was collected), *Country* (country where the seed lot was
-collected), *Population* (geographical information of the seed lot),
-*Latitude* (approximated latitude where the seed lot was collected, in
-decimal degrees), *Longitude* (approximated longitude where the seed lot
-was collected, in decimal degrees), *Dry\_storage* (binary variable
-indicating whether the seed lot was kept at dry storage for more than a
-month between seed collection and start of the experiments), *Setting*
-(environs used to control germination temperature: either a greenhouse,
-a climatically-controlled incubator, or room temperature),
-*Sterilization* (note on surface sterilization treatments applied to the
-seed lot before the experiments), *Nutrients* (note on nutrient
-application to the germination substrate), *Substrate* (substrate used
-to hold the seeds during the germination incubation), *Container\_type*
-(type of container used to hold the substrate and the seeds during the
-experiments), *Container\_size* (dimensions of the germination
-containers), *Container\_number* (number of germination containers used
-for the treatment), *Number\_per\_container* (number of seeds sown in
-each container), *Incubation\_days* (number of days between the start of
-the experiment, not including stratification, and the last day when
+The database is provided as a *csv* file, comma separated [(**Appendix
+S5**)](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/Appendix%20S5%20-%20Database.csv).
+The first row of the file contains the header data, with the following
+variables: *Taxon* (the original species names, as used in the
+references), *TPLName* (*The Plant List* species names), *Family* (the
+botanical family of the species), *Reference* (bibliographic source of
+the record), *Year* (year the seed lot was collected), *Country*
+(country where the seed lot was collected), *Population* (geographical
+information of the seed lot), *Latitude* (approximated latitude where
+the seed lot was collected, in decimal degrees), *Longitude*
+(approximated longitude where the seed lot was collected, in decimal
+degrees), *Dry\_storage* (binary variable indicating whether the seed
+lot was kept at dry storage for more than a month between seed
+collection and start of the experiments), *Setting* (environs used to
+control germination temperature: either a greenhouse, a
+climatically-controlled incubator, or room temperature), *Sterilization*
+(note on surface sterilization treatments applied to the seed lot before
+the experiments), *Nutrients* (note on nutrient application to the
+germination substrate), *Substrate* (substrate used to hold the seeds
+during the germination incubation), *Container\_type* (type of container
+used to hold the substrate and the seeds during the experiments),
+*Container\_size* (dimensions of the germination containers),
+*Container\_number* (number of germination containers used for the
+treatment), *Number\_per\_container* (number of seeds sown in each
+container), *Incubation\_days* (number of days between the start of the
+experiment, not including stratification, and the last day when
 germinated seeds were counted), *Scarification* (binary variable
 indicating whether the seed lot was scarified before the test),
 *Stratification\_days* (number of days the seed lot was exposed to any
@@ -335,8 +356,25 @@ are calculated using binomial-normal meta-analysis models (Stijnen et
 al. [2010](#ref-RN4663)) as implemented in the package *metafor*
 (Viechtbauer [2010](#ref-RN2274)). By visiting the app, users can
 consult the available germination information for a species (**Fig.
-@ref(fig:fig2)**), the origin of its seed lots, and the bibliographical
-references for the species.
+2**), the origin of its seed lots, and the bibliographical references
+for the species.
+
+<div class="figure">
+
+<img src="../results/Fig2.png" alt="**Figure 2** *Example of the germination records as shown by the SylvanSeeds app. Records for one species, the European common beech, Fagus sylvatica. Each panel shows the results for a combination of experimental conditions, with the germination temperature varying within each panel. Bars represent the mean germination proportion and brackets the 95% binomial confidence interval.*" width="4015" />
+
+<p class="caption">
+
+**Figure 2** *Example of the germination records as shown by the
+SylvanSeeds app. Records for one species, the European common beech,
+Fagus sylvatica. Each panel shows the results for a combination of
+experimental conditions, with the germination temperature varying within
+each panel. Bars represent the mean germination proportion and brackets
+the 95% binomial confidence interval.*
+
+</p>
+
+</div>
 
 # Discussion
 
@@ -378,6 +416,30 @@ the FP7 – Marie Curie - COFUND programme of the European Commission
 (Grant ‘Clarín’ ACB17-19). The list of species was built thanks to
 sPlot, a project of the Synthesis Centre of the German Centre for
 Integrative Biodiversity Research (iDiv) Halle-Jena-Leipzig.
+
+# Supporting Information
+
+[**Appendices
+S1-S4**](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/Appendices%20S1-S4.pdf)
+PRISMA 2009 flow chart describing the process of reference screening and
+inclusion; bibliography in BibTeX format listing the not-found full
+texts, the non-relevant references and the relevant references included
+in the *SylvanSeeds* database. [**Appendix
+S5**](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/Appendix%20S5%20-%20Database.csv)
+*SylvanSeeds* database in a single *.csv* file.
+
+# Data accessibility
+
+All persons can use the database providing they cite this paper properly
+in any publications or in the metadata of any derived products that are
+produced using the database. The database is provided as [**Appendix
+S5**](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/Appendix%20S5%20-%20Database.csv)
+of this manuscript, but please do visit
+<https://efernandezpascual.github.io/home/sylvanseeds.html> to check for
+updates. It can be visualized with the *SylvanSeeds* app at
+<https://efernandezpascual.shinyapps.io/sylvanseeds/>. The code to
+create this manuscript and the app is stored at
+<https://github.com/efernandezpascual/sylvanseeds>.
 
 # References
 
@@ -689,39 +751,3 @@ the Tidyverse. *Journal of Open Source Software* 4: 1686.
 </div>
 
 </div>
-
-# Supporting Information
-
-**Appendix S1** PRISMA 2009 flow chart describing the process of
-reference screening and inclusion. **Appendix S2** Bibliography in
-BibTeX format listing the not-found full texts. **Appendix S3**
-Bibliography in BibTeX format listing the non-relevant references.
-**Appendix S4** Bibliography in BibTeX format listing the relevant
-references included in the *SylvanSeeds* database. **Appendix S5**
-*SylvanSeeds* database in a single *.csv* file.
-
-# Data accessibility
-
-All persons can use the database providing they cite this paper properly
-in any publications or in the metadata of any derived products that are
-produced using the database. The database is provided as **Appendix S5**
-of this manuscript, but please do visit
-<https://efernandezpascual.github.io/home/sylvanseeds.html> to check for
-updates. It can be visualized with the *SylvanSeeds* app at
-<https://efernandezpascual.shinyapps.io/sylvanseeds/>. The code to
-create this manuscript and the app is stored at
-<https://github.com/efernandezpascual/sylvanseeds>.
-
-# Figures
-
-![Geographical distribution of the germination records in the database.
-Each golden circle is a record. The green areas correspond to the
-extension of the Temperate Broadleaf and Mixed Forests biome according
-to the *WWF*.](manuscript_files/figure-gfm/fig1-1.png)
-
-![Example of the germination records as shown by the *SylvanSeeds* app.
-Records for one species, the European common beech, *Fagus sylvatica*.
-Each panel shows the results for a combination of experimental
-conditions, with the germination temperature varying within each panel.
-Bars represent the mean germination proportion and brackets the 95%
-binomial confidence interval.](manuscript_files/figure-gfm/fig2-1.png)
