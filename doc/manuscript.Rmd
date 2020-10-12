@@ -1,6 +1,6 @@
 ---
 title: "SylvanSeeds, a seed germination database for temperate deciduous forests"
-output: github_document
+output: pdf_document
 bibliography: refs.bib
 csl: journal-of-vegetation-science.csl
 link-citations: yes
@@ -24,6 +24,8 @@ load(here("results", "msfigs.RData"))
 ```
 
 **Author:** Eduardo Fernández-Pascual **Institutional address:** Departamento de Biología de Organismos y Sistemas, Universidad de Oviedo, C/ Catedrático Rodrigo Uría, 33006 Oviedo/Uviéu, Spain **Email:** efernandezpascual@gmail.com **Telephone:** +34985104787
+
+*This is the peer reviewed version of the following article: Fernández-Pascual, E. (2020). SylvanSeeds, a seed germination database for temperate deciduous forests. Journal of Vegetation Science, which has been published in final form at https://doi.org/10.1111/jvs.12960.*
 
 # Abstract
 
@@ -63,8 +65,8 @@ For each relevant reference, three blocks of information were recorded. The firs
 
 The final database contains `r MSrecords` records (germination proportions for a given seed lot of a species, recorded in a set of experimental conditions) from 555 references. The plant materials had been collected across the Temperate Broadleaf and Mixed Forest biome and surrounding areas (**Fig. 1**), in both hemispheres. Although the frequent species list was created using only relevés from the northern hemisphere, the web search of germination articles found studies of those species that had been performed in the southern hemisphere. These records are included in the database, and their geographical origin is reported. The oldest record was from 1920 and the top three contributing countries were the USA (`r MScountries[1, 2]`), the UK (`r MScountries[2, 2]`) and Japan (`r MScountries[3, 2]`). There were `r MSspecies` species represented, from `r MSfamilies` seed plant families. The total estimate of seeds used in the experiments was `r MSseeds`. The range of germination temperatures (weighted average of the daily thermoperiod) went from `r MSminT` to `r MSmaxT` ºC, with `r MSaltY` records of constant temperatures and `r MSaltN` of alternating temperatures. Light was used in `r MSlightY` records, darkness in `r MSlightN` and `r MSlightNA` did not provide information on this parameter. The experiments were performed with unstratified seeds in `r MSstratN` records, and of the rest, the majority (`r MSstratCold`) went through cold stratification. Scarification was applied to `r MSscarY` records.
 
-```{r fig1, echo = FALSE, message = FALSE, warning = FALSE, fig.pos = "H", fig.cap = "**Figure 1** *Geographical distribution of the germination records in the database. Each golden circle is a record. The green areas correspond to the extension of the Temperate Broadleaf and Mixed Forests biome according to the *WWF*.*", fig.width=7, fig.height=3}
-knitr::include_graphics("../results/Fig1.png")
+```{r fig1, echo = FALSE, message = FALSE, warning = FALSE, fig.cap = "Geographical distribution of the germination records in the database. Each golden circle is a record. The green areas correspond to the extension of the Temperate Broadleaf and Mixed Forests biome according to the WWF.", fig.width=7, fig.height=3}
+p1
 ```
 
 ## Database file
@@ -75,8 +77,8 @@ The database is provided as a *csv* file, comma separated [(**Appendix S5**)](ht
 
 To facilitate the visualization of the database, the *SylvanSeeds* app was written using the *shiny* package [@RN4661]. It is publicly accessible at https://efernandezpascual.shinyapps.io/sylvanseeds/. The app uses the *tidyverse* package [@RN4662] to aggregate and show results for species and experimental treatments (i.e. aggregating all seed lots of the same species germinated in the same experimental conditions). To facilitate comparisons, germination temperatures are aggregated to 5 ºC intervals. When there is only one seed lot per species and combination of experimental conditions, the binomial 95% confidence interval is calculated using the Wilson method in the *binom* package [@RN2964]. When there is more than one seed lot per species and combination of experimental conditions, the aggregate proportion and binomial confidence intervals are calculated using binomial-normal meta-analysis models [@RN4663] as implemented in the package *metafor* [@RN2274]. By visiting the app, users can consult the available germination information for a species (**Fig. 2**), the origin of its seed lots, and the bibliographical references for the species.
 
-```{r fig2, echo = FALSE, fig.pos = "H", fig.cap = "**Figure 2** *Example of the germination records as shown by the SylvanSeeds app. Records for one species, the European common beech, Fagus sylvatica. Each panel shows the results for a combination of experimental conditions, with the germination temperature varying within each panel. Bars represent the mean germination proportion and brackets the 95% binomial confidence interval.*", fig.width=7, fig.height=5}
-knitr::include_graphics("../results/Fig2.png")
+```{r fig2, echo = FALSE, fig.cap = "Example of the germination records as shown by the SylvanSeeds app. Records for one species, the European common beech, Fagus sylvatica. Each panel shows the results for a combination of experimental conditions, with the germination temperature varying within each panel. Bars represent the mean germination proportion and brackets the 95% binomial confidence interval.", fig.width=7, fig.height=5}
+p2
 ```
 
 # Discussion
