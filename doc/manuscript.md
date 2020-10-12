@@ -580,7 +580,7 @@ control of germination. *New Phytologist* 171: 501–523.
 <div id="ref-RN4931">
 
 Givnish, T.J. 2002. Adaptive significance of evergreen vs. deciduous
-leaves: solving the triple paradox. *Silva fennica* 36: 703–743.
+leaves: solving the triple paradox. *Silva Fennica* 36: 703–743.
 
 </div>
 
@@ -683,7 +683,7 @@ functional traits worldwide. *Australian Journal of Botany* 61: 167–234.
 
 <div id="ref-RN2315">
 
-R Core Team. 2019. R: A language and environment for statistical
+R Core Team. 2019. R: a language and environment for statistical
 computing. 
 
 </div>
@@ -702,7 +702,7 @@ Phytologist* 221: 1764–1775.
 Stijnen, T., Hamza, T.H., & Özdemir, P. 2010. Random effects
 meta‐analysis of event outcome in the framework of the generalized
 linear mixed model with applications in sparse data. *Statistics in
-medicine* 29: 3046–3067.
+Medicine* 29: 3046–3067.
 
 </div>
 
