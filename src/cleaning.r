@@ -411,11 +411,8 @@ Germination %>%
         axis.title = element_text(size = 14, face = "bold"),
         legend.text = element_text(size = 16, face = "bold")) -> p2
 
-ggsave(p1, file = "results/Fig1.png",
+ggsave(p1, file = "results/Fig1.pdf",
        path = NULL, scale = 1, width = 170, height = 70, units = "mm", dpi = 600)
 
-ggsave(p2, file = "results/Fig2.png",
-       path = NULL, scale = 1, width = 170, height = 150, units = "mm", dpi = 600)
-
-save(p1, p2,
-     file = here::here("results", "msfigs.RData"))
+ggsave(p2, file = "results/Fig2.pdf",
+       path = NULL, scale = 1, width = 170, height = 120, units = "mm", dpi = 600)
