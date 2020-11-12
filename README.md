@@ -3,7 +3,7 @@ README.md
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4081377.svg)](https://doi.org/10.5281/zenodo.4081377)
 
-![SylvanSeeds](data/2017070313%20Blue%20Ridge%20Parkway%20small.jpg)
+![SylvanSeeds](2017070313%20Blue%20Ridge%20Parkway%20small.jpg)
 
 # SylvanSeeds, a seed germination database for temperate deciduous forests
 
@@ -31,21 +31,20 @@ and storing research projects.
 
 The following materials are available in this repository:
 
-  - `data` Original raw files including the primary result of the search
-    in the Web of Science, and search notes.
+  - `data` Primary data files including the SylvanSeeds database in csv
+    format and Boolean search string used in the Web of Science.
   - `doc` Files to create the
     [manuscript](https://github.com/efernandezpascual/sylvanseeds/blob/master/doc/manuscript.md)
     using `Rmarkdown`.
-  - `results` Output of the `R` scripts, including the clean database
-    and files needed to create the manuscript.
-  - `src` Scripts in `R` language used to clean the raw data, perform
-    the analyses of the manuscript, and build the `SylvanSeeds` app.
+  - `results` Output of the `R` scripts, including files needed to
+    create the manuscript and run the app.
+  - `src` Scripts in `R` language used to clean data, perform analyses,
+    and build the `SylvanSeeds` app data.
 
 ## Citation
 
 Please cite `SylvanSeeds` as:
 
-> Fernández-Pascual, E. (2021). [SylvanSeeds, a seed germination
-> database for temperate deciduous
-> forests.](https://doi.org/10.1111/jvs.12960) *Journal of Vegetation
-> Science.*
+> Fernández-Pascual E (2021) [SylvanSeeds, a seed germination database
+> for temperate deciduous forests.](https://doi.org/10.1111/jvs.12960)
+> *Journal of Vegetation Science.*

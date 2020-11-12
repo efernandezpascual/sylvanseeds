@@ -4,17 +4,17 @@ library(tidyverse); library(here); library(sp); library(openxlsx)
 
 ## TPL Names from common source
 
-read.csv("../#tpl/results/TPLNames.csv") -> Names # TPL taxonomy files are in my home drive
-read.csv("../#tpl/results/Families.csv") -> SeedFamilies # TPL taxonomy files are in my home drive
+read.csv("../#data/tpl/results/TPLNames.csv") -> Names # TPL taxonomy files are in my home drive
+read.csv("../#data/tpl/results/Families.csv") -> SeedFamilies # TPL taxonomy files are in my home drive
 
 ## Clean species file
 
 rbind(
-  read.csv("../#plots/data/sPlot12/species_Edu.csv") %>% # sPlot vegetation files are in my home drive
+  read.csv("../#data/plots/data/sPlot12/species_Edu.csv") %>% # sPlot vegetation files are in my home drive
     select(PlotObservationID, species, Relative.cover) %>%
     rename(Cover = Relative.cover, PlotID = PlotObservationID, Taxon = species) %>%
     mutate(PlotID = paste("Rest", PlotID, sep = "_")),
-  read.csv("../#plots/data/sPlot12/forest2_1500.csv", sep = "\t") %>% # sPlot vegetation files are in my home drive
+  read.csv("../#data/plots/data/sPlot12/forest2_1500.csv", sep = "\t") %>% # sPlot vegetation files are in my home drive
     select(Relevé.number, Species.name, Cover..) %>%
     rename(Cover = Cover.., PlotID = Relevé.number, Taxon = Species.name) %>%
     mutate(PlotID = paste("Japan", PlotID, sep = "_"))) %>%
@@ -25,7 +25,7 @@ rbind(
 ## Clean plot header file
 
 rbind(
-  read.csv("../#plots/data/sPlot12/TDFNH3_Edu.csv") %>% # sPlot vegetation files are in my home drive
+  read.csv("../#data/plots/data/sPlot12/TDFNH3_Edu.csv") %>% # sPlot vegetation files are in my home drive
     filter(Herbs.identified..y.n. != "N" | 
              ! Plants.recorded %in% c("All trees & dominant shrubs", 
                                       "All woody species", 
@@ -42,9 +42,9 @@ rbind(
            Latitude = POINT_Y) %>%
     mutate(PlotID = paste("Rest", PlotID, sep = "_")),
   
-  read.table("../#plots/data/sPlot12/japan2.txt", sep = ";", header = T) %>% # sPlot vegetation files are in my home drive
+  read.table("../#data/plots/data/sPlot12/japan2.txt", sep = ";", header = T) %>% # sPlot vegetation files are in my home drive
     select(PlotID, REALM:ECO_NAME) %>% 
-    merge(read.csv("../#plots/data/sPlot12/forest2_1500.hea", sep = "\t", quote = ""), by = "PlotID") %>% # sPlot vegetation files are in my home drive
+    merge(read.csv("../#data/plots/data/sPlot12/forest2_1500.hea", sep = "\t", quote = ""), by = "PlotID") %>% # sPlot vegetation files are in my home drive
     filter(BIOME == 4) %>%
     select(Relevé.number, ECO_NAME, Altitude..m., Aspect...., 
            Slope...., DEG_LON, DEG_LAT) %>%
@@ -113,104 +113,13 @@ rbind(
   paste(collapse = "” OR “") -> BooleanSpp
 
 paste("(seed OR seeds) AND (dormancy OR germination) AND (“", BooleanSpp, "”)", sep ="") %>% 
-  write.table(here("results", "Boolean search string.txt"), row.names = F)
+  write.table(here("data", "Boolean search string.txt"), row.names = F)
 
 # Cleaning of the database
 
-read.csv(here("data", "WoS", "Forest_WoS.csv")) -> WoS
+read.csv("../#data/germination/results/TBMF_Database.csv") -> TBMFDB
 
-WoS %>%
-  pull(Latitude) %>% as.character %>%
-  char2dms(chd = "d", chm = "m", chs = "s") %>%
-  as.numeric -> WoS$Latitude
-
-WoS %>%
-  pull(Longitude) %>% as.character %>%
-  char2dms(chd = "d", chm = "m", chs = "s") %>%
-  as.numeric -> WoS$Longitude
-
-WoS %>%
-  merge(read.xlsx(here("data", "WoS", "References.xlsx")), all.x = TRUE,  by = "Reference") %>%
-  merge(read.xlsx(here("data", "WoS", "Populations.xlsx")), all.x = TRUE, by = "Population") %>%
-  merge(read.csv(here("data", "WoS", "Stratification.csv")), all.x = TRUE) %>%
-  merge(read.csv("../#tpl/results/TPLNames.csv"), by.x = "Species", by.y = "Taxon", all.x = TRUE) %>%
-  merge(read.csv(here("data", "WoS", "Forest_WoS - rev1 - revisión manual de substratos.csv")), by = "Reference") %>%
-  rename(Taxon = Species,
-         Photoperiod = Ligh, 
-         Year = Date.collection,
-         Stratification_temperature = Stratification,
-         Stratification_days = Stratification.days) %>%
-  mutate(PopulationID = as.factor(PopulationID),
-         ReferenceID = as.factor(ReferenceID),
-         TPLName = as.factor(paste(New.Genus, New.Species)),
-         Number_seeds = Replicates * Sown.per.replicate,
-         Germinated = round((Germination * Number_seeds)/100, 0),
-         Germinated = ifelse(Germinated > Number_seeds, Number_seeds, Germinated),
-         Stratification = as.factor(ifelse(Stratification_type == "None", "N", "Y")),
-         GA3 = as.factor(ifelse(GA == 0, "N", "Y")),
-         Light = as.factor(ifelse(Photoperiod == 0, "N", "Y")),
-         Alternating = as.factor(ifelse(Tmax == Tmin, "N", "Y")),
-         Tdif = Tmax - Tmin,
-         Tmean = Tmax * (Period / 24) + Tmin * ((24 - Period)/24),
-         Temperature = cut(Tmean, seq(-7.5, 47.5, 5), 
-                           labels = c("-5", "0", "5", "10", "15",
-                                      "20", "25", "30", "35", "40", "45")),
-         Container_number = Replicates,
-         Number_per_container = Sown.per.replicate,
-         Incubation_days = Length.experiment,
-         Dry_storage = Dry.storage) %>%
-  mutate(Biome = ifelse(TPLName %in% TBMFspp, "TBMF", "TCF")) %>%
-  filter(! is.na(Taxon)) %>%
-  filter(GA3 == "N") %>%
-  filter(! is.na(Germinated)) %>%
-  dplyr::select(Biome,
-                Taxon, 
-                TPLName,
-                Family,
-                ReferenceRevised, 
-                Year, 
-                Country, 
-                Population, 
-                Latitude, 
-                Longitude,
-                Dry_storage,
-                Setting,
-                Sterilization,
-                Nutrients,
-                Substrate,
-                Container_type,
-                Container_size,
-                Container_number,
-                Number_per_container,
-                Incubation_days,
-                Scarification, 
-                Stratification_days, 
-                Stratification_temperature, 
-                Stratification_type, 
-                Stratification,
-                Light, 
-                Photoperiod, 
-                Alternating, 
-                Tdif,
-                Tmax, 
-                Tmin, 
-                Tmean, 
-                Temperature,
-                Germinated, 
-                Number_seeds) %>%
-  rename(Reference = ReferenceRevised) -> 
-  WoSDB
-
-WoSDB %>%
-  filter(Biome == "TBMF") %>%
-  select(-Biome) -> TBMFDB # Temperate broadleaf and mixed forest database
-
-WoSDB %>%
-  filter(Biome == "TCF") %>%
-  select(-Biome) -> TCFDB # Temperate coniferous forest database
-
-readr::write_excel_csv(TBMFDB, here::here("results", "TBMF_Database.csv"))
-readr::write_excel_csv(TCFDB, here::here("results", "TCF_Database.csv"))
+readr::write_excel_csv(TBMFDB, here::here("data", "TBMF_Database.csv"))
 
 # Calculate numbers for the manuscript main text
 
@@ -240,8 +149,6 @@ dfHeader %>%
 TBMFDB %>% tally() -> MSrecords
 
 TBMFDB %>% pull(Reference) %>% unique %>% length -> MSreferences
-
-TCFDB %>% pull(Reference) %>% unique %>% length -> MSreferencesTCF
 
 TBMFDB %>% pull(Family) %>% unique %>% length -> MSfamilies
 
@@ -358,12 +265,12 @@ library(plyr)
 
 ## Prepare WWF shapefile
 
-readOGR(dsn = "../#wwfmap/WWF", 
+readOGR(dsn = "../#data/maps/WWF", 
         layer = "wwf_terr_ecos") -> Ecoregions # Map files are in my home drive
 rownames(Ecoregions@data) -> Ecoregions@data$id
 fortify(Ecoregions, region = "id") -> Ecoregions.points 
 join(Ecoregions.points, Ecoregions@data, by = "id") %>%
-  inner_join(read.csv("../#wwfmap/Biomes.csv"), by = "BIOME") %>%
+  inner_join(read.csv("../#data/maps/Biomes.csv"), by = "BIOME") %>%
   filter(BIOME == 4) ->
   TBMF
 
@@ -411,8 +318,8 @@ Germination %>%
         axis.title = element_text(size = 14, face = "bold"),
         legend.text = element_text(size = 16, face = "bold")) -> p2
 
-ggsave(p1, file = "results/Fig1.pdf",
+ggsave(p1, file = "results/Fig1.png",
        path = NULL, scale = 1, width = 170, height = 70, units = "mm", dpi = 600)
 
-ggsave(p2, file = "results/Fig2.pdf",
+ggsave(p2, file = "results/Fig2.png",
        path = NULL, scale = 1, width = 170, height = 120, units = "mm", dpi = 600)
