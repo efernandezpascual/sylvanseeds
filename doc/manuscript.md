@@ -282,7 +282,7 @@ according to the WWF.*
 ## Database file
 
 The database is provided as a *csv* file, comma separated [(**Appendix
-S5**)](https://github.com/efernandezpascual/sylvanseeds/blob/master/results/TBMF_Database.csv).
+S5**)](https://github.com/efernandezpascual/sylvanseeds/blob/master/data/TBMF_Database.csv).
 The first row of the file contains the header data, with the following
 variables: *Taxon* (the original species names, as used in the
 references), *TPLName* (*The Plant List* species names), *Family* (the
@@ -425,7 +425,7 @@ PRISMA 2009 flow chart describing the process of reference screening and
 inclusion; bibliography in BibTeX format listing the not-found full
 texts, the non-relevant references and the relevant references included
 in the *SylvanSeeds* database. [**Appendix
-S5**](https://github.com/efernandezpascual/sylvanseeds/blob/master/results/TBMF_Database.csv)
+S5**](https://github.com/efernandezpascual/sylvanseeds/blob/master/data/TBMF_Database.csv)
 *SylvanSeeds* database in a single *.csv* file.
 
 # Data accessibility
@@ -433,7 +433,7 @@ S5**](https://github.com/efernandezpascual/sylvanseeds/blob/master/results/TBMF_
 All persons can use the database providing they cite this paper properly
 in any publications or in the metadata of any derived products that are
 produced using the database. The database is provided as [**Appendix
-S5**](https://github.com/efernandezpascual/sylvanseeds/blob/master/results/TBMF_Database.csv)
+S5**](https://github.com/efernandezpascual/sylvanseeds/blob/master/data/TBMF_Database.csv)
 of this manuscript, but please do visit
 <https://efernandezpascual.github.io/home/sylvanseeds.html> to check for
 updates. It can be visualized with the *SylvanSeeds* app at
