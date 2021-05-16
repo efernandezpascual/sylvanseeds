@@ -47,4 +47,4 @@ Please cite `SylvanSeeds` as:
 
 > Fernández-Pascual E (2021) [SylvanSeeds, a seed germination database
 > for temperate deciduous forests.](https://doi.org/10.1111/jvs.12960)
-> *Journal of Vegetation Science.*
+> *Journal of Vegetation Science* 32, e12960.
